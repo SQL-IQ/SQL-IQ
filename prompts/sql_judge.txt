@@ -24,4 +24,3 @@ Instructions:
 
 Output Format:
 Please think step by step, then return your answer 'A' or 'B' in <answer> </answer> tags.
-Please think step by step.
