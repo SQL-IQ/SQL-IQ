@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  sql-iq-oracle:
+    image: container-registry.oracle.com/database/free:latest
+    container_name: sql-iq-oracle
+    restart: unless-stopped
+    environment:
+      ORACLE_SID: "FREE"
+      ORACLE_PDB: "XEPDB1"
+      ORACLE_PWD: "123456"
+    ports:
+      - "1521:1521"
+    volumes:
+      - sql_iq_oracle_data:/opt/oracle/oradata
+    shm_size: '2g'
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/oracle/checkDBStatus.sh || exit 1"]
+      interval: 60s
+      timeout: 30s
+      start_period: 300s
+
+volumes:
+  sql_iq_oracle_data:
+    driver: local

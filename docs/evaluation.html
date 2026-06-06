@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SQL-IQ | Evaluation</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="font-sans text-gray-800 antialiased">
+  <!-- Navigation -->
+  <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2">
+        <span class="text-xl font-bold text-gray-900 tracking-tight">SQL-IQ</span>
+      </a>
+      <div class="flex items-center gap-8">
+        <a href="index.html" class="nav-link">Leaderboard</a>
+        <a href="dataset.html" class="nav-link">Dataset</a>
+        <a href="submission.html" class="nav-link">Submission</a>
+        <a href="evaluation.html" class="nav-link active">Evaluation</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Content -->
+  <section class="max-w-4xl mx-auto px-6 py-16 page-content">
+    <h1 class="section-title">Evaluation</h1>
+    <p class="section-subtitle max-w-3xl">
+      Detailed description of metrics, computation formulas, and the evaluation environment
+      used across all 7 tasks in SQL-IQ.
+    </p>
+
+    <!-- Metrics Overview Table -->
+    <div class="content-section">
+      <h2 class="content-heading">Metrics by Task</h2>
+      <p class="text-sm text-gray-500 mb-4">
+        Each task uses a metric appropriate to its nature. All scores are reported as percentages (0–100).
+      </p>
+      <div class="table-container">
+        <table class="metrics-table">
+          <thead>
+            <tr>
+              <th>Task</th>
+              <th>Metric</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="font-medium text-gray-900">Text-to-SQL</td>
+              <td><span class="metric-badge">Execution Accuracy (EX)</span></td>
+              <td>Whether the predicted SQL produces the same result as the gold SQL on the test database</td>
+            </tr>
+            <tr>
+              <td class="font-medium text-gray-900">Conversational SQL</td>
+              <td><span class="metric-badge">Execution Accuracy (EX)</span></td>
+              <td>Same as Text-to-SQL but evaluated within multi-turn context</td>
+            </tr>
+            <tr>
+              <td class="font-medium text-gray-900">SQL Judge</td>
+              <td><span class="metric-badge">Accuracy</span></td>
+              <td>Whether the model selects the correct SQL from two candidates</td>
+            </tr>
+            <tr>
+              <td class="font-medium text-gray-900">SQL Equivalence Judge</td>
+              <td><span class="metric-badge">Accuracy</span></td>
+              <td>Whether the model correctly determines if two SQL queries are semantically equivalent</td>
+            </tr>
+            <tr>
+              <td class="font-medium text-gray-900">SQL Error Classification</td>
+              <td><span class="metric-badge">Accuracy</span></td>
+              <td>Whether the model correctly identifies the error type in a buggy SQL query</td>
+            </tr>
+            <tr>
+              <td class="font-medium text-gray-900">SQL Debugging†</td>
+              <td><span class="metric-badge">Reward Score</span></td>
+              <td>BIRD-CRITIC's composite score measuring debugging quality</td>
+            </tr>
+            <tr>
+              <td class="font-medium text-gray-900">SQL Translation</td>
+              <td><span class="metric-badge">Execution Accuracy (EX)</span></td>
+              <td>Whether the translated SQL produces correct results on the target dialect's engine</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="footnote mt-3">
+        † SQL Debugging is evaluated via
+        <a href="https://github.com/bird-bench/BIRD-CRITIC-1" target="_blank" rel="noopener">BIRD-CRITIC</a>.
+        See their documentation for detailed metric definitions.
+      </p>
+    </div>
+
+    <!-- Metric Formulas -->
+    <div class="content-section">
+      <h2 class="content-heading">Metric Formulas</h2>
+
+      <!-- Execution Accuracy -->
+      <div class="formula-card">
+        <h3 class="formula-title">Execution Accuracy (EX)</h3>
+        <p class="formula-desc">
+          Used for Text-to-SQL, Conversational SQL, and SQL Translation. Compares the execution
+          results of the predicted SQL against the gold SQL on the evaluation database.
+        </p>
+        <div class="formula-box">
+          <code>EX = (1/N) × Σᵢ 𝟙[ exec(pred_i) = exec(gold_i) ]</code>
+        </div>
+        <ul class="formula-notes">
+          <li><code>N</code> — Total number of test samples</li>
+          <li><code>exec(q)</code> — The result set obtained by executing query <code>q</code> on the test database</li>
+          <li><code>𝟙[·]</code> — Indicator function (1 if condition holds, 0 otherwise)</li>
+        </ul>
+      </div>
+
+      <!-- Accuracy -->
+      <div class="formula-card">
+        <h3 class="formula-title">Accuracy</h3>
+        <p class="formula-desc">
+          Used for SQL Judge, SQL Equivalence Judge, and SQL Error Classification.
+          Measures the proportion of correct predictions.
+        </p>
+        <div class="formula-box">
+          <code>Accuracy = (1/N) × Σᵢ 𝟙[ pred_i = label_i ]</code>
+        </div>
+        <ul class="formula-notes">
+          <li><code>pred_i</code> — Model's predicted label/choice for sample <code>i</code></li>
+          <li><code>label_i</code> — Ground truth label for sample <code>i</code></li>
+        </ul>
+      </div>
+
+      <!-- Overall -->
+      <div class="formula-card">
+        <h3 class="formula-title">Overall Score</h3>
+        <p class="formula-desc">
+          The Overall score is the unweighted arithmetic mean of all submitted task scores.
+          If a model has not been evaluated on some tasks, the Overall is computed only over
+          the tasks with available scores.
+        </p>
+        <div class="formula-box">
+          <code>Overall = (1/|T|) × Σ_{t∈T} score_t</code>
+        </div>
+        <ul class="formula-notes">
+          <li><code>T</code> — Set of tasks for which scores are available (|T| ≤ 7)</li>
+          <li><code>score_t</code> — The score (0–100) for task <code>t</code></li>
+          <li>For a complete submission (all 7 tasks), Overall is the simple 7-task average</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Evaluation Environment -->
+    <div class="content-section">
+      <h2 class="content-heading">Evaluation Environment</h2>
+      <p class="text-sm text-gray-500 mb-6">
+        Different tasks use different database engines for execution-based evaluation.
+      </p>
+
+      <div class="env-grid">
+        <!-- Text-to-SQL & Conversational SQL -->
+        <div class="env-card">
+          <div class="env-card-header">
+            <div class="env-icon sqlite">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/></svg>
+            </div>
+            <h3 class="env-card-title">SQLite</h3>
+          </div>
+          <p class="env-card-desc">Used for Text-to-SQL and Conversational SQL evaluation.</p>
+          <div class="env-card-meta">
+            <span class="meta-tag">Text-to-SQL</span>
+            <span class="meta-tag">Conversational SQL</span>
+          </div>
+        </div>
+
+        <!-- SQL Translation targets -->
+        <div class="env-card">
+          <div class="env-card-header">
+            <div class="env-icon multi">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            </div>
+            <h3 class="env-card-title">Multi-Dialect Engines</h3>
+          </div>
+          <p class="env-card-desc">SQL Translation is evaluated on the native engine of each target dialect.</p>
+          <div class="env-card-meta">
+            <span class="meta-tag">Oracle</span>
+            <span class="meta-tag">PostgreSQL</span>
+            <span class="meta-tag">ClickHouse</span>
+            <span class="meta-tag">Druid</span>
+            <span class="meta-tag">MSSQL</span>
+          </div>
+        </div>
+
+        <!-- Comprehension & Error Classification -->
+        <div class="env-card">
+          <div class="env-card-header">
+            <div class="env-icon llm">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            </div>
+            <h3 class="env-card-title">Output Matching</h3>
+          </div>
+          <p class="env-card-desc">Classification and judgment tasks compare model output against ground truth labels — no SQL execution needed.</p>
+          <div class="env-card-meta">
+            <span class="meta-tag">SQL Judge</span>
+            <span class="meta-tag">Equivalence Judge</span>
+            <span class="meta-tag">Error Classification</span>
+          </div>
+        </div>
+
+        <!-- SQL Debugging -->
+        <div class="env-card">
+          <div class="env-card-header">
+            <div class="env-icon external">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+            </div>
+            <h3 class="env-card-title">BIRD-CRITIC</h3>
+          </div>
+          <p class="env-card-desc">SQL Debugging is evaluated entirely within the BIRD-CRITIC framework using their own environment and tooling.</p>
+          <div class="env-card-meta">
+            <span class="meta-tag">SQL Debugging</span>
+            <a href="https://github.com/bird-bench/BIRD-CRITIC-1" target="_blank" rel="noopener" class="meta-link">Repository →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Execution Details -->
+    <div class="content-section">
+      <h2 class="content-heading">Execution Details</h2>
+      <div class="details-list">
+        <div class="detail-item">
+          <h4 class="detail-title">Result Comparison</h4>
+          <p class="detail-desc">
+            For execution accuracy, we compare result sets as <strong>unordered multi-sets</strong>
+            unless the gold SQL contains an explicit <code>ORDER BY</code> clause, in which case
+            the result is compared as an ordered list.
+          </p>
+        </div>
+        <div class="detail-item">
+          <h4 class="detail-title">Timeout Handling</h4>
+          <p class="detail-desc">
+            SQL execution is subject to a <strong>30-second timeout</strong>. Queries exceeding
+            this limit are marked as incorrect. This prevents infinite loops and extremely
+            inefficient queries from stalling evaluation.
+          </p>
+        </div>
+        <div class="detail-item">
+          <h4 class="detail-title">SQL Translation Scoring</h4>
+          <p class="detail-desc">
+            For SQL Translation, the final score is the <strong>macro-average</strong> across
+            all 5 target dialects. Each dialect contributes equally to the composite score,
+            regardless of the number of test samples per dialect.
+          </p>
+        </div>
+        <div class="detail-item">
+          <h4 class="detail-title">Error Tolerance</h4>
+          <p class="detail-desc">
+            Predictions that cause runtime errors (syntax errors, type mismatches, etc.) are
+            counted as incorrect. No partial credit is given for partially correct results.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-gray-100 mt-12">
+    <div class="max-w-6xl mx-auto px-6 py-8 text-center text-sm text-gray-400">
+      <p>SQL-IQ Benchmark · MIT License · 2026</p>
+    </div>
+  </footer>
+</body>
+</html>

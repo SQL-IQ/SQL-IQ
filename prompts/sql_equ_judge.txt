@@ -1,0 +1,10 @@
+You are an SQL expert tasked with determining whether two SQL queries are equivalent (i.e., produce identical results when executed). Please carefully analyze the database schema and the two SQL queries. Reason step by step to determine whether the two SQL queries are equivalent. Let’s think through this step by step.
+
+Output Requirements:
+Please think step by step, then return your final answer "yes" or "no" in <answer> </answer> tags.
+
+Schema: {schema}
+
+SQL1: {sql1}
+
+SQL2: {sql2}

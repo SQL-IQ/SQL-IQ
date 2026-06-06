@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SQL-IQ | Dataset</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="font-sans text-gray-800 antialiased">
+  <!-- Navigation -->
+  <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2">
+        <span class="text-xl font-bold text-gray-900 tracking-tight">SQL-IQ</span>
+      </a>
+      <div class="flex items-center gap-8">
+        <a href="index.html" class="nav-link">Leaderboard</a>
+        <a href="dataset.html" class="nav-link active">Dataset</a>
+        <a href="submission.html" class="nav-link">Submission</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Content -->
+  <section class="max-w-5xl mx-auto px-6 py-16 page-content">
+    <!-- Page Header -->
+    <h1 class="section-title">Dataset Overview</h1>
+    <p class="section-subtitle max-w-3xl">
+      SQL-IQ is a comprehensive benchmark that evaluates LLMs across the full spectrum of SQL intelligence.
+      It spans 4 dimensions and 7 tasks, covering generation, comprehension, debugging, and cross-dialect adaptation.
+    </p>
+
+    <!-- Task Dimensions -->
+    <h2 class="text-xl font-bold text-gray-900 mb-6">Tasks by Dimension</h2>
+
+    <!-- Generation -->
+    <div class="dimension-group">
+      <div class="dimension-header">
+        <span class="dimension-badge generation">Generation</span>
+        <span class="dimension-desc">Evaluating models' ability to produce correct SQL from various inputs</span>
+      </div>
+      <div class="grid md:grid-cols-2 gap-4 mt-4">
+        <!-- Text-to-SQL -->
+        <div class="task-card">
+          <h3 class="task-card-title">Text-to-SQL</h3>
+          <p class="task-card-desc">
+            Translate natural language questions into executable SQL queries given a database schema.
+            This is the most fundamental SQL generation capability.
+          </p>
+          <div class="task-card-meta">
+            <span class="meta-tag">NL → SQL</span>
+            <span class="meta-tag">SQLite</span>
+          </div>
+        </div>
+        <!-- Conversational SQL -->
+        <div class="task-card">
+          <h3 class="task-card-title">Conversational SQL</h3>
+          <p class="task-card-desc">
+            Generate SQL in multi-turn dialogue settings where context from previous turns
+            must be understood and carried forward to produce correct queries.
+          </p>
+          <div class="task-card-meta">
+            <span class="meta-tag">Multi-turn</span>
+            <span class="meta-tag">Context-aware</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Comprehension -->
+    <div class="dimension-group">
+      <div class="dimension-header">
+        <span class="dimension-badge comprehension">Comprehension</span>
+        <span class="dimension-desc">Evaluating models' understanding and reasoning about SQL semantics</span>
+      </div>
+      <div class="grid md:grid-cols-2 gap-4 mt-4">
+        <!-- SQL Equivalence Judge -->
+        <div class="task-card">
+          <h3 class="task-card-title">SQL Equivalence Judge</h3>
+          <p class="task-card-desc">
+            Given two SQL queries, determine whether they are semantically equivalent —
+            i.e., whether they always produce the same result on any valid database instance.
+          </p>
+          <div class="task-card-meta">
+            <span class="meta-tag">Equivalence</span>
+            <span class="meta-tag">Pair-wise</span>
+          </div>
+        </div>
+        <!-- SQL Judge -->
+        <div class="task-card">
+          <h3 class="task-card-title">SQL Judge</h3>
+          <p class="task-card-desc">
+            Given a natural language question and two candidate SQL queries, select the one
+            that correctly answers the question. Tests comparative SQL comprehension.
+          </p>
+          <div class="task-card-meta">
+            <span class="meta-tag">Correctness</span>
+            <span class="meta-tag">Pair-wise</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Debugging -->
+    <div class="dimension-group">
+      <div class="dimension-header">
+        <span class="dimension-badge debugging">Debugging</span>
+        <span class="dimension-desc">Evaluating models' ability to identify and fix SQL errors</span>
+      </div>
+      <div class="grid md:grid-cols-2 gap-4 mt-4">
+        <!-- SQL Error Classification -->
+        <div class="task-card">
+          <h3 class="task-card-title">SQL Error Classification</h3>
+          <p class="task-card-desc">
+            Given a buggy SQL query, detect and classify the type of error present
+            (e.g., syntax error, logic error, schema mismatch, etc.).
+          </p>
+          <div class="task-card-meta">
+            <span class="meta-tag">Error Type</span>
+            <span class="meta-tag">Diagnosis</span>
+          </div>
+        </div>
+        <!-- SQL Debugging -->
+        <div class="task-card">
+          <div class="flex items-center gap-2">
+            <h3 class="task-card-title">SQL Debugging</h3>
+            <span class="external-badge">External</span>
+          </div>
+          <p class="task-card-desc">
+            Fix buggy SQL queries given error messages and database context. This task is sourced from
+            the BIRD-CRITIC benchmark and evaluated using their framework.
+          </p>
+          <div class="task-card-meta">
+            <span class="meta-tag">Bug Fixing</span>
+            <span class="meta-tag">BIRD-CRITIC</span>
+            <a href="https://github.com/bird-bench/BIRD-CRITIC-1" target="_blank" rel="noopener" class="meta-link">
+              Repository →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Adaptation -->
+    <div class="dimension-group">
+      <div class="dimension-header">
+        <span class="dimension-badge adaptation">Adaptation</span>
+        <span class="dimension-desc">Evaluating models' ability to work across different SQL dialects</span>
+      </div>
+      <div class="grid md:grid-cols-1 gap-4 mt-4">
+        <!-- SQL Translation -->
+        <div class="task-card">
+          <h3 class="task-card-title">SQL Translation</h3>
+          <p class="task-card-desc">
+            Translate SQL queries between different database dialects. Models must understand
+            dialect-specific syntax and functions to produce equivalent queries in the target dialect.
+          </p>
+          <div class="task-card-meta">
+            <span class="meta-tag">Oracle</span>
+            <span class="meta-tag">PostgreSQL</span>
+            <span class="meta-tag">ClickHouse</span>
+            <span class="meta-tag">Druid</span>
+            <span class="meta-tag">MSSQL</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Download Section -->
+    <div class="mt-14 pt-10 border-t border-gray-100">
+      <h2 class="text-xl font-bold text-gray-900 mb-3">Access the Data</h2>
+      <p class="text-gray-500 text-sm mb-6 max-w-2xl">
+        The SQL-IQ benchmark data and evaluation code are hosted on GitHub.
+        SQL Debugging uses an external repository (BIRD-CRITIC).
+      </p>
+      <div class="flex items-center gap-4 flex-wrap">
+        <a href="https://github.com/SQL-IQ/SQL-IQ" target="_blank" rel="noopener" class="btn-primary">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+          SQL-IQ Repository
+        </a>
+        <a href="https://github.com/bird-bench/BIRD-CRITIC-1" target="_blank" rel="noopener" class="btn-secondary">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          BIRD-CRITIC (SQL Debugging)
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-gray-100 mt-12">
+    <div class="max-w-6xl mx-auto px-6 py-8 text-center text-sm text-gray-400">
+      <p>SQL-IQ Benchmark · MIT License · 2026</p>
+    </div>
+  </footer>
+</body>
+</html>

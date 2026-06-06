@@ -1,0 +1,29 @@
+Task Overview:
+You are a database and SQL expert. You will be given a SQL query written for a source database system and asked to translate it into an equivalent SQL query for a target database system.
+
+Source Database System:
+{source_dialect}
+
+Target Database System:
+{target_dialect}
+
+Target Database Schema:
+{target_schema}
+This schema describes the structure of the *target* database, including tables, columns, data types, and constraints. The translated SQL must be valid and executable against this schema.
+
+Source SQL Query:
+{source_sql}
+
+Instructions:
+
+* Translate the query so that it preserves the **exact same meaning and result set** under the target database system.
+* Ensure all table and column references conform strictly to the provided *target database schema*.
+* DO NOT include '\n' in the translated SQL 
+
+Output Format:
+In your answer, please enclose the generated SQL query in a code block:
+```sql
+-- Your SQL query
+```
+
+Take a deep breath and think step by step to find the correct SQL query.

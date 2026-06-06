@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  sql-iq-clickhouse:
+    image: clickhouse/clickhouse-server:latest
+    container_name: sql-iq-clickhouse
+    restart: unless-stopped
+    environment:
+      CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: "1"
+    ports:
+      - "8123:8123"   # HTTP interface
+      - "9000:9000"   # Native TCP interface
+    volumes:
+      - sql_iq_clickhouse_data:/var/lib/clickhouse
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+
+volumes:
+  sql_iq_clickhouse_data:
+    driver: local

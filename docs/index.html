@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SQL-IQ | Holistic SQL Intelligence Evaluation</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="font-sans text-gray-800 antialiased">
+  <!-- Navigation -->
+  <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center gap-2">
+        <span class="text-xl font-bold text-gray-900 tracking-tight">SQL-IQ</span>
+      </a>
+      <!-- Nav Links -->
+      <div class="flex items-center gap-8">
+        <a href="index.html" class="nav-link active">Leaderboard</a>
+        <a href="dataset.html" class="nav-link">Dataset</a>
+        <a href="submission.html" class="nav-link">Submission</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="grid-bg">
+    <div class="max-w-4xl mx-auto px-6 pt-20 pb-16 text-center">
+      <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight tracking-tight">
+        SQL-IQ: Holistic SQL Intelligence<br>Evaluation for LLMs
+      </h1>
+      <p class="mt-6 text-lg text-gray-500 max-w-2xl mx-auto leading-relaxed">
+        A unified benchmark evaluating large language models across 7 tasks spanning
+        SQL generation, comprehension, debugging, and cross-dialect adaptation.
+      </p>
+      <div class="mt-8 flex items-center justify-center gap-4 flex-wrap">
+        <a href="#" class="btn-primary">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+          Read the Paper
+        </a>
+        <a href="https://github.com/SQL-IQ/SQL-IQ" target="_blank" rel="noopener" class="btn-secondary">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+          GitHub Repository
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Leaderboard Section -->
+  <section class="max-w-6xl mx-auto px-6 py-12 page-content">
+    <div class="flex items-baseline justify-between flex-wrap gap-4">
+      <div>
+        <h2 class="section-title">Leaderboard</h2>
+        <p class="section-subtitle mb-4">
+          Model performance across 7 SQL intelligence tasks. Click column headers to sort.
+        </p>
+      </div>
+      <span id="leaderboard-stats" class="text-xs text-gray-400 font-medium"></span>
+    </div>
+
+    <!-- View Tabs -->
+    <div class="view-tabs mb-5">
+      <button class="view-tab active" data-view="overall">Overall Results</button>
+      <button class="view-tab" data-view="translation">Translation Breakdown</button>
+    </div>
+
+    <!-- Overall View -->
+    <div id="view-overall">
+      <!-- Filters -->
+      <div class="flex items-center gap-2 mb-6 flex-wrap">
+        <span class="text-sm text-gray-500 mr-2">Filter by</span>
+        <button class="filter-btn active" data-filter="all">All Tasks</button>
+        <button class="filter-btn" data-filter="generation">Generation</button>
+        <button class="filter-btn" data-filter="comprehension">Comprehension</button>
+        <button class="filter-btn" data-filter="debugging">Debugging</button>
+        <button class="filter-btn" data-filter="adaptation">Adaptation</button>
+      </div>
+
+      <!-- Table -->
+      <div class="table-container">
+        <table id="leaderboard-table" class="leaderboard-table">
+          <!-- Rendered by JS -->
+        </table>
+      </div>
+
+      <!-- Footnote -->
+      <p class="footnote">
+        SQL Correction is evaluated via
+        <a href="https://github.com/bird-bench/BIRD-CRITIC-1" target="_blank" rel="noopener">BIRD-CRITIC</a>.
+        Avg is the macro-average over all 7 tasks.
+      </p>
+    </div>
+
+    <!-- Translation Breakdown View -->
+    <div id="view-translation" style="display:none;">
+      <p class="text-sm text-gray-500 mb-6">
+        Per-dialect performance on the SQL Translation task (SQLite → target dialect). Click column headers to sort.
+      </p>
+      <div class="table-container">
+        <table id="translation-table" class="leaderboard-table">
+          <!-- Rendered by JS -->
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-gray-100 mt-12">
+    <div class="max-w-6xl mx-auto px-6 py-8 text-center text-sm text-gray-400">
+      <p>SQL-IQ Benchmark · MIT License · 2026</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

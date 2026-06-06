@@ -1,0 +1,376 @@
+[
+  {
+    "model": "Gemini-3.0-flash",
+    "organization": "Google",
+    "type": "proprietary",
+    "scores": {
+      "text2sql": 60.56,
+      "conversational_sql": 61.13,
+      "sql_judge": 59.95,
+      "sql_equ_judge": 78.35,
+      "sql_err_class": 54.03,
+      "sql_debugging": 41.33,
+      "sql_trans": 61.35
+    },
+    "translation_details": {
+      "postgresql": 77.16,
+      "mssql": 67.76,
+      "oracle": 46.06,
+      "clickhouse": 67.28,
+      "druid": 48.49
+    },
+    "overall": 59.53
+  },
+  {
+    "model": "Claude-4.5-sonnet",
+    "organization": "Anthropic",
+    "type": "proprietary",
+    "scores": {
+      "text2sql": 67.01,
+      "conversational_sql": 59.04,
+      "sql_judge": 69.95,
+      "sql_equ_judge": 74.11,
+      "sql_err_class": 56.22,
+      "sql_debugging": 31.83,
+      "sql_trans": 52.49
+    },
+    "translation_details": {
+      "postgresql": 72.41,
+      "mssql": 53.95,
+      "oracle": 34.99,
+      "clickhouse": 62.21,
+      "druid": 38.90
+    },
+    "overall": 58.66
+  },
+  {
+    "model": "GPT-5-mini",
+    "organization": "OpenAI",
+    "type": "proprietary",
+    "scores": {
+      "text2sql": 60.82,
+      "conversational_sql": 54.28,
+      "sql_judge": 66.16,
+      "sql_equ_judge": 74.00,
+      "sql_err_class": 57.84,
+      "sql_debugging": 26.83,
+      "sql_trans": 62.74
+    },
+    "translation_details": {
+      "postgresql": 70.69,
+      "mssql": 69.74,
+      "oracle": 50.44,
+      "clickhouse": 70.51,
+      "druid": 52.33
+    },
+    "overall": 57.52
+  },
+  {
+    "model": "DeepSeek-v4-flash",
+    "organization": "DeepSeek",
+    "type": "open-source",
+    "scores": {
+      "text2sql": 61.80,
+      "conversational_sql": 53.01,
+      "sql_judge": 63.46,
+      "sql_equ_judge": 75.10,
+      "sql_err_class": 58.96,
+      "sql_debugging": 32.17,
+      "sql_trans": 37.76
+    },
+    "translation_details": {
+      "postgresql": 46.12,
+      "mssql": 46.05,
+      "oracle": 30.90,
+      "clickhouse": 45.16,
+      "druid": 20.55
+    },
+    "overall": 54.61
+  },
+  {
+    "model": "Qwen3-32B",
+    "organization": "Alibaba",
+    "type": "open-source",
+    "scores": {
+      "text2sql": 62.13,
+      "conversational_sql": 56.18,
+      "sql_judge": 63.84,
+      "sql_equ_judge": 70.74,
+      "sql_err_class": 53.75,
+      "sql_debugging": 28.83,
+      "sql_trans": 47.68
+    },
+    "translation_details": {
+      "postgresql": 58.62,
+      "mssql": 48.03,
+      "oracle": 42.57,
+      "clickhouse": 54.38,
+      "druid": 34.79
+    },
+    "overall": 54.74
+  },
+  {
+    "model": "Qwen3-30B-A3B-Instruct",
+    "organization": "Alibaba",
+    "type": "open-source",
+    "scores": {
+      "text2sql": 66.69,
+      "conversational_sql": 59.10,
+      "sql_judge": 63.35,
+      "sql_equ_judge": 69.92,
+      "sql_err_class": 54.02,
+      "sql_debugging": 21.50,
+      "sql_trans": 37.61
+    },
+    "translation_details": {
+      "postgresql": 54.74,
+      "mssql": 40.79,
+      "oracle": 22.16,
+      "clickhouse": 43.78,
+      "druid": 26.58
+    },
+    "overall": 53.17
+  },
+  {
+    "model": "Qwen3-14B",
+    "organization": "Alibaba",
+    "type": "open-source",
+    "scores": {
+      "text2sql": 61.73,
+      "conversational_sql": 57.07,
+      "sql_judge": 57.95,
+      "sql_equ_judge": 72.44,
+      "sql_err_class": 51.60,
+      "sql_debugging": 27.50,
+      "sql_trans": 38.78
+    },
+    "translation_details": {
+      "postgresql": 46.98,
+      "mssql": 37.50,
+      "oracle": 34.40,
+      "clickhouse": 45.16,
+      "druid": 29.86
+    },
+    "overall": 52.44
+  },
+  {
+    "model": "Qwen3-8B",
+    "organization": "Alibaba",
+    "type": "open-source",
+    "scores": {
+      "text2sql": 59.68,
+      "conversational_sql": 53.58,
+      "sql_judge": 62.32,
+      "sql_equ_judge": 69.98,
+      "sql_err_class": 50.91,
+      "sql_debugging": 24.67,
+      "sql_trans": 33.00
+    },
+    "translation_details": {
+      "postgresql": 42.67,
+      "mssql": 33.55,
+      "oracle": 29.45,
+      "clickhouse": 38.25,
+      "druid": 21.10
+    },
+    "overall": 50.59
+  },
+  {
+    "model": "Meta-Llama3.1-70B-Inst",
+    "organization": "Meta",
+    "type": "open-source",
+    "scores": {
+      "text2sql": 65.10,
+      "conversational_sql": 55.23,
+      "sql_judge": 62.11,
+      "sql_equ_judge": 60.08,
+      "sql_err_class": 49.76,
+      "sql_debugging": 23.00,
+      "sql_trans": 37.02
+    },
+    "translation_details": {
+      "postgresql": 51.29,
+      "mssql": 46.05,
+      "oracle": 18.37,
+      "clickhouse": 47.47,
+      "druid": 21.92
+    },
+    "overall": 50.33
+  },
+  {
+    "model": "Qwen2.5-Coder-32B-Inst",
+    "organization": "Alibaba",
+    "type": "open-source",
+    "scores": {
+      "text2sql": 64.50,
+      "conversational_sql": 57.89,
+      "sql_judge": 61.08,
+      "sql_equ_judge": 56.11,
+      "sql_err_class": 54.27,
+      "sql_debugging": 25.83,
+      "sql_trans": 28.63
+    },
+    "translation_details": {
+      "postgresql": 35.34,
+      "mssql": 43.42,
+      "oracle": 7.29,
+      "clickhouse": 32.72,
+      "druid": 24.38
+    },
+    "overall": 49.76
+  },
+  {
+    "model": "Qwen3-4B-Thinking-2507",
+    "organization": "Alibaba",
+    "type": "open-source",
+    "scores": {
+      "text2sql": 65.51,
+      "conversational_sql": 57.26,
+      "sql_judge": 60.59,
+      "sql_equ_judge": 73.26,
+      "sql_err_class": 47.03,
+      "sql_debugging": 7.17,
+      "sql_trans": 33.73
+    },
+    "translation_details": {
+      "postgresql": 39.66,
+      "mssql": 28.29,
+      "oracle": 30.03,
+      "clickhouse": 50.69,
+      "druid": 20.00
+    },
+    "overall": 49.22
+  },
+  {
+    "model": "XiyanSQL-32B-2504",
+    "organization": "Alibaba",
+    "type": "open-source",
+    "scores": {
+      "text2sql": 69.30,
+      "conversational_sql": 55.17,
+      "sql_judge": 58.59,
+      "sql_equ_judge": 53.74,
+      "sql_err_class": 56.86,
+      "sql_debugging": 24.00,
+      "sql_trans": 27.33
+    },
+    "translation_details": {
+      "postgresql": 43.53,
+      "mssql": 38.16,
+      "oracle": 6.41,
+      "clickhouse": 28.57,
+      "druid": 20.00
+    },
+    "overall": 49.29
+  },
+  {
+    "model": "OmniSQL-32B",
+    "organization": "DAMO Academy",
+    "type": "open-source",
+    "scores": {
+      "text2sql": 64.53,
+      "conversational_sql": 54.53,
+      "sql_judge": 52.22,
+      "sql_equ_judge": 51.03,
+      "sql_err_class": 54.99,
+      "sql_debugging": 23.83,
+      "sql_trans": 27.40
+    },
+    "translation_details": {
+      "postgresql": 42.24,
+      "mssql": 36.18,
+      "oracle": 7.29,
+      "clickhouse": 27.19,
+      "druid": 24.11
+    },
+    "overall": 46.92
+  },
+  {
+    "model": "Qwen3-4B-Instruct-2507",
+    "organization": "Alibaba",
+    "type": "open-source",
+    "scores": {
+      "text2sql": 64.47,
+      "conversational_sql": 53.90,
+      "sql_judge": 69.57,
+      "sql_equ_judge": 40.77,
+      "sql_err_class": 50.27,
+      "sql_debugging": 18.83,
+      "sql_trans": 22.82
+    },
+    "translation_details": {
+      "postgresql": 31.03,
+      "mssql": 25.66,
+      "oracle": 6.71,
+      "clickhouse": 30.41,
+      "druid": 20.27
+    },
+    "overall": 45.80
+  },
+  {
+    "model": "GPT-3.5-Turbo",
+    "organization": "OpenAI",
+    "type": "proprietary",
+    "scores": {
+      "text2sql": 52.54,
+      "conversational_sql": 50.03,
+      "sql_judge": 47.14,
+      "sql_equ_judge": 49.59,
+      "sql_err_class": 45.95,
+      "sql_debugging": 21.50,
+      "sql_trans": 34.91
+    },
+    "translation_details": {
+      "postgresql": 34.48,
+      "mssql": 43.42,
+      "oracle": 20.12,
+      "clickhouse": 50.23,
+      "druid": 26.30
+    },
+    "overall": 43.09
+  },
+  {
+    "model": "Qwen2.5-Coder-7B-Inst",
+    "organization": "Alibaba",
+    "type": "open-source",
+    "scores": {
+      "text2sql": 50.91,
+      "conversational_sql": 45.40,
+      "sql_judge": 57.08,
+      "sql_equ_judge": 40.23,
+      "sql_err_class": 45.71,
+      "sql_debugging": 18.00,
+      "sql_trans": 17.42
+    },
+    "translation_details": {
+      "postgresql": 21.55,
+      "mssql": 28.95,
+      "oracle": 4.96,
+      "clickhouse": 16.59,
+      "druid": 15.07
+    },
+    "overall": 39.25
+  },
+  {
+    "model": "Meta-Llama3.1-8B-Inst",
+    "organization": "Meta",
+    "type": "open-source",
+    "scores": {
+      "text2sql": 42.00,
+      "conversational_sql": 38.11,
+      "sql_judge": 55.62,
+      "sql_equ_judge": 53.13,
+      "sql_err_class": 34.20,
+      "sql_debugging": 25.33,
+      "sql_trans": 20.10
+    },
+    "translation_details": {
+      "postgresql": 24.57,
+      "mssql": 20.39,
+      "oracle": 4.66,
+      "clickhouse": 32.26,
+      "druid": 18.63
+    },
+    "overall": 38.36
+  }
+]

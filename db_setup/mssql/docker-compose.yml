@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  sql-iq-mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sql-iq-mssql
+    restart: unless-stopped
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "Bird@123456"
+      MSSQL_PID: "developer"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sql_iq_mssql_data:/var/opt/mssql
+    shm_size: '256mb'
+
+volumes:
+  sql_iq_mssql_data:
+    driver: local

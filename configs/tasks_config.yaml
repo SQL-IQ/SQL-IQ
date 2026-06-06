@@ -1,0 +1,131 @@
+# SQL-IQ Task Configuration
+# Defines data sources, schemas, database connections, and prompts for each task.
+#
+# Usage:
+#   sql-iq --tasks_config configs/tasks_config.yaml --tasks text2sql,sql_judge
+#   python -m sql_iq --tasks_config configs/tasks_config.yaml --tasks sql_trans
+#
+# Notes:
+#   - Replace <YOUR_...> placeholders with actual paths before running.
+#   - Paths can be relative (to the working directory) or absolute.
+#   - Tasks that do not require SQL execution (sql_judge, sql_equ_judge, sql_err_class)
+#     do not need db_dir.
+
+# --------------------------------------------------------------------------
+# Text2SQL
+# --------------------------------------------------------------------------
+text2sql:
+  # Data file (JSON format, contains questions + ground truth SQL)
+  data_path: data/text2sql/bird_dev.json
+
+  # Schema file (JSONL format, one schema per database)
+  schema_path: data/schemas/bird_dev.jsonl
+
+  # Database directory (contains SQLite .db files for execution evaluation)
+  db_dir: <YOUR_BIRD_DB_DIR>
+
+  # Prompt template file
+  prompt_template: prompts/text2sql.txt
+
+  # Whether to skip evaluation (set to true for inference-only mode)
+  skip_eval: false
+
+# --------------------------------------------------------------------------
+# Conversational SQL (Multi-turn Text2SQL)
+# --------------------------------------------------------------------------
+conversational_sql:
+  # Data file (JSON format, contains multi-turn dialogues)
+  data_path: data/conversational_sql/multiturn.json
+
+
+  # Schema file
+  schema_path: data/schemas/bird_dev.jsonl
+
+  # Database directory (for execution evaluation)
+  db_dir: <YOUR_BIRD_DB_DIR>
+
+  # Prompt template file
+  prompt_template: prompts/conversational_sql.txt
+
+  skip_eval: false
+
+# --------------------------------------------------------------------------
+# SQL Judge (Binary choice: select correct SQL from two candidates)
+# --------------------------------------------------------------------------
+sql_judge:
+  # Data file (JSONL format, contains question + two candidate SQLs)
+  data_path: data/sql_judge/sql_judge_dev.jsonl
+
+  # Schema file
+  schema_path: data/schemas/bird_dev.jsonl
+
+  # No database execution needed for this task
+  # db_dir: not required
+
+  # Prompt template file
+  prompt_template: prompts/sql_judge.txt
+
+  skip_eval: false
+
+# --------------------------------------------------------------------------
+# SQL Equivalence Judge (Determine if two SQLs are semantically equivalent)
+# --------------------------------------------------------------------------
+sql_equ_judge:
+  # Data file (JSONL format, contains SQL pairs + equivalence labels)
+  data_path: data/sql_equ_judge/sql_equ_judge.jsonl
+
+  # Schema file
+  schema_path: data/schemas/bird_dev.jsonl
+
+  # No database execution needed for this task
+  # db_dir: not required
+
+  # Prompt template file
+  prompt_template: prompts/sql_equ_judge.txt
+
+  skip_eval: false
+
+# --------------------------------------------------------------------------
+# SQL Error Classification (Detect errors and classify error types)
+# --------------------------------------------------------------------------
+sql_err_class:
+  # Data file (JSON format, contains question + erroneous SQL + error labels)
+  data_path: data/sql_err_class/err_class.json
+
+  # Schema file
+  schema_path: data/schemas/bird_dev.jsonl
+
+  # No database execution needed for this task
+  # db_dir: not required
+
+  # Prompt template file
+  prompt_template: prompts/sql_err_class.txt
+
+  skip_eval: false
+
+# --------------------------------------------------------------------------
+# SQL Translation (Cross-dialect SQL translation)
+# --------------------------------------------------------------------------
+sql_trans:
+  # Data directory (contains per-dialect JSON files: oracle.json, postgresql.json, etc.)
+  # Each file only includes samples with verified (non-glot) translations.
+  data_dir: data/sql_trans
+
+  # Schema directory (contains {dialect}_schema.json files)
+  # The framework automatically loads the schema for each target dialect.
+  schema_path: data/schemas/sql_trans_schemas
+
+  # Database directory (for execution-based evaluation of translated SQL)
+  db_dir: <YOUR_BIRD_DB_DIR>
+
+  # Prompt template file
+  prompt_template: prompts/sql_trans.txt
+
+  # Source dialect (the dialect of the input SQL)
+  source_dialect: sqlite
+
+  # Target dialects to translate into
+  # The framework automatically loads data/sql_trans/{dialect}.json for each dialect.
+  target_dialect: ["oracle", "postgresql", "clickhouse", "druid", "mssql"]
+
+  skip_eval: false

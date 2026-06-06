@@ -1,0 +1,37 @@
+name: Leaderboard Submission
+description: Submit your model's predictions to the SQL-IQ leaderboard
+title: "[Submission] {Model Name}"
+labels: ["submission"]
+body:
+  - type: input
+    id: model_name
+    attributes:
+      label: Model Name
+      placeholder: e.g., GPT-4o
+    validations:
+      required: true
+
+  - type: input
+    id: bird_critic_score
+    attributes:
+      label: BIRD-CRITIC Reward Score (SQL Correction)
+      description: "0-100, or leave blank if not evaluated"
+      placeholder: e.g., 42.5
+    validations:
+      required: false
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Brief Description
+      placeholder: Describe your model or method briefly (optional)
+    validations:
+      required: false
+
+  - type: textarea
+    id: predictions
+    attributes:
+      label: Prediction Files
+      description: "Attach your predictions.zip here. See the submission guide for the required format."
+    validations:
+      required: true

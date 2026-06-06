@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SQL-IQ | Submission</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="font-sans text-gray-800 antialiased">
+  <!-- Navigation -->
+  <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2">
+        <span class="text-xl font-bold text-gray-900 tracking-tight">SQL-IQ</span>
+      </a>
+      <div class="flex items-center gap-8">
+        <a href="index.html" class="nav-link">Leaderboard</a>
+        <a href="dataset.html" class="nav-link">Dataset</a>
+        <a href="submission.html" class="nav-link active">Submission</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Content -->
+  <section class="max-w-4xl mx-auto px-6 py-16 page-content">
+    <h1 class="section-title">Submission Guide</h1>
+    <p class="section-subtitle max-w-3xl">
+      Submit your model's <strong>prediction files</strong> and we will run the official evaluation
+      pipeline to produce scores. This ensures fairness and reproducibility across all submissions.
+    </p>
+
+    <!-- How It Works -->
+    <div class="content-section">
+      <h2 class="content-heading">How It Works</h2>
+      <div class="info-box mb-6">
+        <div class="info-box-header">
+          <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <span>Evaluation Model</span>
+        </div>
+        <ul class="info-box-list">
+          <li><strong>6 tasks</strong> (Text-to-SQL, Conversational SQL, SQL Judge, SQL Equivalence Judge, SQL Error Classification, SQL Translation) — you submit <strong>prediction files</strong>; we run official evaluation scripts and produce the scores.</li>
+          <li><strong>SQL Debugging†</strong> — evaluated externally via <a href="https://github.com/bird-bench/BIRD-CRITIC-1" target="_blank" rel="noopener" class="inline-link">BIRD-CRITIC</a>. You run their evaluation yourself and report the score.</li>
+        </ul>
+      </div>
+
+      <div class="steps-container">
+        <!-- Step 1 -->
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h3 class="step-title">Generate Predictions</h3>
+            <p class="step-desc">
+              Clone the SQL-IQ repository and run your model on each task's test set.
+              Save the raw predictions (generated SQL queries, classification labels, etc.)
+              in the format specified below.
+            </p>
+          </div>
+        </div>
+        <!-- Step 2 -->
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h3 class="step-title">Package Submission</h3>
+            <p class="step-desc">
+              Organize your prediction files into the standard directory structure and include
+              a <code>metadata.json</code> with model information. For SQL Debugging, include
+              your BIRD-CRITIC score in the metadata.
+            </p>
+          </div>
+        </div>
+        <!-- Step 3 -->
+        <div class="step-item">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h3 class="step-title">Submit via GitHub Issue</h3>
+            <p class="step-desc">
+              Open an issue on our
+              <a href="https://github.com/SQL-IQ/SQL-IQ/issues/new?template=leaderboard_submission.yml" target="_blank" rel="noopener" class="inline-link">GitHub repository</a>
+              using the "Leaderboard Submission" issue template.
+              Attach your prediction files (as a zip) and fill in the required fields
+              (model name, organization, BIRD-CRITIC score, etc.).
+            </p>
+          </div>
+        </div>
+        <!-- Step 4 -->
+        <div class="step-item">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h3 class="step-title">Official Evaluation & Publish</h3>
+            <p class="step-desc">
+              We run the official evaluation pipeline on your predictions in our controlled
+              environment.
+              Once verified, your scores will appear on the leaderboard within 3–5 business days.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Submission Format -->
+    <div class="content-section">
+      <h2 class="content-heading">Submission Format</h2>
+      <p class="text-sm text-gray-500 mb-4">
+        Your submission should contain a <code>metadata.json</code> and a <code>predictions/</code> directory
+        with one JSON file per task. This mirrors the output structure of the SQL-IQ evaluation pipeline.
+      </p>
+
+      <!-- Directory Structure -->
+      <div class="code-block mb-6">
+        <div class="code-header">
+          <span class="code-filename">Directory Structure</span>
+          <span class="code-lang">TREE</span>
+        </div>
+        <pre class="code-content"><code>submission/
+├── metadata.json
+└── predictions/
+    ├── text2sql/predictions.json
+    ├── conversational_sql/predictions.json
+    ├── sql_judge/predictions.json
+    ├── sql_equ_judge/predictions.json
+    ├── sql_err_class/predictions.json
+    ├── sql_trans_oracle/predictions.json
+    ├── sql_trans_postgresql/predictions.json
+    ├── sql_trans_clickhouse/predictions.json
+    ├── sql_trans_druid/predictions.json
+    └── sql_trans_mssql/predictions.json</code></pre>
+      </div>
+
+      <!-- metadata.json -->
+      <div class="code-block mb-6">
+        <div class="code-header">
+          <span class="code-filename">metadata.json</span>
+          <span class="code-lang">JSON</span>
+        </div>
+        <pre class="code-content"><code>{
+  "model": "Your-Model-Name",
+  "organization": "Your Organization",
+  "description": "Brief description of the model or method",
+  "model_version": "gpt-4o-2025-05-13",
+  "sql_debugging_score": 42.5,
+  "contact_email": "your@email.com"
+}</code></pre>
+      </div>
+
+      <div class="info-box mt-4">
+        <div class="info-box-header">
+          <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <span>Metadata Fields</span>
+        </div>
+        <ul class="info-box-list">
+          <li><code>model</code> — Display name for the leaderboard entry.</li>
+          <li><code>model_version</code> — Specific model version or checkpoint (for reproducibility).</li>
+          <li><code>sql_debugging_score</code> — Your BIRD-CRITIC Reward Score (0–100). Set to <code>null</code> if not evaluated.</li>
+          <li><code>contact_email</code> — For verification purposes only; will not be published.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Prediction File Formats -->
+    <div class="content-section">
+      <h2 class="content-heading">Prediction File Formats</h2>
+      <p class="text-sm text-gray-500 mb-6">
+        Each <code>predictions.json</code> is a JSON array. Every entry must include an <code>id</code> field
+        (matching the test sample) and a <code>prediction</code> field. You only need to submit tasks you want to be evaluated on.
+      </p>
+
+      <!-- Text-to-SQL -->
+      <div class="formula-card">
+        <h3 class="formula-title">Text-to-SQL</h3>
+        <p class="formula-desc">
+          Provide the predicted SQL query string for each sample. Evaluated by <strong>Execution Accuracy</strong>
+          (comparing query execution results against ground truth on SQLite).
+        </p>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-filename">text2sql/predictions.json</span>
+            <span class="code-lang">JSON</span>
+          </div>
+          <pre class="code-content"><code>[
+  { "id": 0, "prediction": "SELECT name FROM schools WHERE type = 'Charter'" },
+  { "id": 1, "prediction": "SELECT COUNT(*) FROM frpm WHERE county = 'Los Angeles'" },
+  ...
+]</code></pre>
+        </div>
+      </div>
+
+      <!-- Conversational SQL -->
+      <div class="formula-card">
+        <h3 class="formula-title">Conversational SQL</h3>
+        <p class="formula-desc">
+          Multi-turn SQL generation. Each entry includes the turn context. Evaluated by <strong>Execution Accuracy</strong>.
+        </p>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-filename">conversational_sql/predictions.json</span>
+            <span class="code-lang">JSON</span>
+          </div>
+          <pre class="code-content"><code>[
+  { "id": 0, "prediction": "SELECT AVG(score) FROM students WHERE grade = 'A'" },
+  { "id": 1, "prediction": "SELECT name FROM students WHERE score > 90" },
+  ...
+]</code></pre>
+        </div>
+      </div>
+
+      <!-- SQL Judge -->
+      <div class="formula-card">
+        <h3 class="formula-title">SQL Judge</h3>
+        <p class="formula-desc">
+          Given two candidate SQLs, predict which one correctly answers the question.
+          Prediction should be <code>"A"</code> or <code>"B"</code>. Evaluated by <strong>Accuracy</strong>.
+        </p>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-filename">sql_judge/predictions.json</span>
+            <span class="code-lang">JSON</span>
+          </div>
+          <pre class="code-content"><code>[
+  { "id": 0, "prediction": "A" },
+  { "id": 1, "prediction": "B" },
+  ...
+]</code></pre>
+        </div>
+      </div>
+
+      <!-- SQL Equivalence Judge -->
+      <div class="formula-card">
+        <h3 class="formula-title">SQL Equivalence Judge</h3>
+        <p class="formula-desc">
+          Determine whether two SQL queries are semantically equivalent.
+          Prediction should be <code>"yes"</code> or <code>"no"</code>.
+          Evaluated by <strong>Geometric Mean</strong> of equivalent-accuracy and non-equivalent-accuracy.
+        </p>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-filename">sql_equ_judge/predictions.json</span>
+            <span class="code-lang">JSON</span>
+          </div>
+          <pre class="code-content"><code>[
+  { "id": 0, "prediction": "yes" },
+  { "id": 1, "prediction": "no" },
+  ...
+]</code></pre>
+        </div>
+      </div>
+
+      <!-- SQL Error Classification -->
+      <div class="formula-card">
+        <h3 class="formula-title">SQL Error Classification</h3>
+        <p class="formula-desc">
+          Detect whether a SQL is correct and classify error types if present.
+          Prediction is a structured object. Evaluated by <strong>Unified F1</strong>.
+        </p>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-filename">sql_err_class/predictions.json</span>
+            <span class="code-lang">JSON</span>
+          </div>
+          <pre class="code-content"><code>[
+  {
+    "id": 0,
+    "prediction": {
+      "result": "False",
+      "error_types": ["Function-Related Errors", "Clause-Related Errors"]
+    }
+  },
+  {
+    "id": 1,
+    "prediction": {
+      "result": "True",
+      "error_types": []
+    }
+  },
+  ...
+]</code></pre>
+        </div>
+        <ul class="formula-notes mt-4">
+          <li><code>result</code>: <code>"True"</code> (no error) or <code>"False"</code> (has errors)</li>
+          <li><code>error_types</code>: list of error category strings (empty if <code>result</code> is <code>"True"</code>)</li>
+        </ul>
+      </div>
+
+      <!-- SQL Translation -->
+      <div class="formula-card">
+        <h3 class="formula-title">SQL Translation</h3>
+        <p class="formula-desc">
+          Translate SQLite queries into target dialects. Submit one file per target dialect
+          (<code>sql_trans_oracle/</code>, <code>sql_trans_postgresql/</code>, <code>sql_trans_clickhouse/</code>,
+          <code>sql_trans_druid/</code>, <code>sql_trans_mssql/</code>).
+          Evaluated by <strong>Execution Accuracy</strong> on the target database engine.
+        </p>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-filename">sql_trans_postgresql/predictions.json</span>
+            <span class="code-lang">JSON</span>
+          </div>
+          <pre class="code-content"><code>[
+  { "id": 0, "prediction": "SELECT CAST(free_meal_count AS FLOAT) / enrollment FROM frpm LIMIT 10" },
+  { "id": 1, "prediction": "SELECT school_name FROM schools WHERE county = 'San Diego'" },
+  ...
+]</code></pre>
+        </div>
+      </div>
+    </div>
+
+
+
+
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-gray-100 mt-12">
+    <div class="max-w-6xl mx-auto px-6 py-8 text-center text-sm text-gray-400">
+      <p>SQL-IQ Benchmark · MIT License · 2026</p>
+    </div>
+  </footer>
+</body>
+</html>

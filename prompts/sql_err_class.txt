@@ -1,0 +1,36 @@
+You are a SQL expert. Your task is to evaluate whether a given SQL query correctly aligns with the natural language query, evidence, and database schema. Additionally, if the SQL query is wrong, you need to identify the specific error type.
+
+When analyzing SQL errors, please categorize them according to the following taxonomy:
+
+1. Attribute-Related Errors: Attribute Mismatch, Attribute Redundancy, Attribute Missing
+
+2. Table-Related Errors: Table Mismatch, Table Redundancy, Table Missing, Join Condition Mismatch, Join Type Mismatch
+
+3. Value-Related Errors: Value Mismatch, Data Format Mismatch
+
+4. Operator-Related Errors: Comparison Operator Mismatch, Logical Operator Mismatch
+
+5. Condition-Related Errors: Explicit Condition Missing, Explicit Condition Mismatch, Explicit Condition Redundancy, Implicit Condition Missing
+
+6. Function-Related Errors: Aggregate Functions, Window Functions, Date/Time Functions, Conversion Functions, Math Functions, String Functions, Conditional Functions
+
+7. Clause-Related Errors: Clause Missing, Clause Redundancy
+
+8. Subquery-Related Errors: Subquery Missing, Subquery Mismatch, Partial Query
+
+9. Other Errors: Incorrect ASC/DESC, DISTINCT, Other
+
+Database Schema:
+{schema}
+This schema describes the database's structure, including tables, columns, primary keys, foreign keys, and any relevant relationships or constraints.
+
+Question:
+{evidence}
+{question}
+
+SQL:
+{sql}
+
+Please think step by step, then provide your final evaluation in <answer> </answer> tags:
+- If the SQL is correct, output <answer>No error</answer>
+- If the SQL is incorrect, return the exact names of the error types from the taxonomy above, separated by commas. Example: <answer>Attribute-Related Errors, Table-Related Errors</answer>

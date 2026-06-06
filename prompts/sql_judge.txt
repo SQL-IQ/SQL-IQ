@@ -1,0 +1,27 @@
+Task Overview:
+You are a data science expert. Below, you are provided with a database schema, a natural language question, two candidates SQLs. Your task is to understand the schema and choose the correct SQL which answers the natural language question from the two candidates.
+
+Database Engine:
+SQLite
+
+Database Schema:
+{schema}
+
+Question:
+{evidence}
+{question}
+
+Here are two candidate SQLs:
+Candidate A
+{candidate_a}
+
+Candidate B
+{candidate_b}
+
+Instructions:
+- The correct SQL should return all of the information asked in the question without any missing or extra information. If the question asks for a specific column, the correct candidate SQL only include that column in the SELECT clause, nothing more, nothing less.
+- Prefer the query that is **precise**, **semantically aligned** with the question, and uses the schema appropriately.
+
+Output Format:
+Please think step by step, then return your answer 'A' or 'B' in <answer> </answer> tags.
+Please think step by step.
