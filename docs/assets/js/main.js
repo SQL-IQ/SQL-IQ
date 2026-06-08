@@ -156,7 +156,7 @@ function renderTable() {
       <tr>
         <th class="rank-cell">#</th>
         <th data-sort="model" class="${getSortClass('model')}">Model</th>
-        <th data-sort="organization" class="${getSortClass('organization')}">Organization</th>
+        ${/* <th data-sort="organization" class="${getSortClass('organization')}">Organization</th> */ ''}
         <th data-sort="overall" class="${getSortClass('overall')}">${overallLabel}</th>`;
 
   visibleTasks.forEach(task => {
@@ -179,7 +179,7 @@ function renderTable() {
     bodyHTML += `<tr>
       <td class="rank-cell ${rankClass}">${rank}</td>
       <td class="model-cell">${escapeHTML(entry.model)}</td>
-      <td>${escapeHTML(entry.organization || '—')}</td>
+      ${/* <td>${escapeHTML(entry.organization || '—')}</td> */ ''}
       <td class="score-cell overall-cell ${overallIsBest ? 'score-best' : ''}">
         ${overall !== null ? overall.toFixed(1) : '<span class="score-na">—</span>'}
       </td>`;

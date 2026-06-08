@@ -243,7 +243,7 @@
   },
   {
     "model": "XiyanSQL-32B-2504",
-    "organization": "Alibaba",
+    "organization": "Alibaba Cloud",
     "type": "open-source",
     "scores": {
       "text2sql": 69.30,
@@ -265,7 +265,7 @@
   },
   {
     "model": "OmniSQL-32B",
-    "organization": "DAMO Academy",
+    "organization": "Renmin University of China + ByteDance Infra Lab",
     "type": "open-source",
     "scores": {
       "text2sql": 64.53,
