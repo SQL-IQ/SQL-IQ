@@ -53,13 +53,13 @@ conversational_sql:
 # SQL Judge (Binary choice: select correct SQL from two candidates)
 # --------------------------------------------------------------------------
 sql_judge:
-  # Data file (JSONL format, contains question + two candidate SQLs)
+  # Data file (JSONL format: question, SQL candidates, and precomputed outputs)
   data_path: data/sql_judge/sql_judge_dev.jsonl
 
   # Schema file
   schema_path: data/schemas/bird_dev.jsonl
 
-  # No database execution needed for this task
+  # Precomputed execution outputs are used; no database execution is needed at runtime
   # db_dir: not required
 
   # Prompt template file

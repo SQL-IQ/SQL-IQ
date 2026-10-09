@@ -14,9 +14,13 @@ Question:
 Here are two candidate SQLs:
 Candidate A
 {candidate_a}
+Execution Output A
+{execution_output_a}
 
 Candidate B
 {candidate_b}
+Execution Output B
+{execution_output_b}
 
 Instructions:
 - The correct SQL should return all of the information asked in the question without any missing or extra information. If the question asks for a specific column, the correct candidate SQL only include that column in the SELECT clause, nothing more, nothing less.

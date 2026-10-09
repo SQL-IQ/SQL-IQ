@@ -10,8 +10,8 @@ from ..core import BaseTask, Sample, TaskRegistry, TaskContext
 @TaskRegistry.register("sql_judge")
 class SQLJudgeTask(BaseTask):
     """
-    SQL Judge task: Given a schema, question, and two candidate SQL queries
-    (one correct, one incorrect), determine which SQL is correct.
+    SQL Judge task: Given a schema, question, two candidate SQL queries, and
+    their execution outputs, determine which SQL is correct.
     """
 
     def __init__(self, config: Dict[str, Any], context: TaskContext):
@@ -39,14 +39,21 @@ class SQLJudgeTask(BaseTask):
         """
         Build prompt from sample.
 
-        Reads pre-shuffled candidate SQL and correct answer from metadata
-        (set during data loading to ensure deterministic ordering).
+        Reads the pre-shuffled candidate SQL and their execution results from metadata.
         """
         schema = sample.schema_str if sample.schema_str else ""
 
         # Read pre-assigned candidates from metadata
         candidate_a = sample.metadata.get("candidate_a", "")
         candidate_b = sample.metadata.get("candidate_b", "")
+
+        # Associate each shuffled candidate with its precomputed execution output.
+        result_by_sql = {
+            sample.metadata.get("pos", ""): sample.metadata.get("pos_result", ""),
+            sample.metadata.get("neg", ""): sample.metadata.get("neg_result", "")
+        }
+        execution_output_a = result_by_sql[candidate_a]
+        execution_output_b = result_by_sql[candidate_b]
 
         # Build evidence section
         evidence = sample.evidence if sample.evidence else ""
@@ -57,7 +64,9 @@ class SQLJudgeTask(BaseTask):
             evidence=evidence_section,
             question=sample.input_text,
             candidate_a=candidate_a,
-            candidate_b=candidate_b
+            candidate_b=candidate_b,
+            execution_output_a=execution_output_a,
+            execution_output_b=execution_output_b
         )
 
     def extract_output(self, llm_response: str) -> str:
